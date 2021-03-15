@@ -7,9 +7,9 @@ namespace HyperjoAPI.CSharpWrapper.TestConsole
         static void Main(string[] args)
         {
             //Usage of login system
-            //We need the Character name, the own password,the key of all rights we want with ',' to separate (in this case all available), and a redirect (i hijacked the test login i hope u don´t mind :*)
+            //We need the Character name, the own password,the key of all rights we want with ',' to separate (in this case all available), and a redirect (ask to register yours at the management)
             HyperjoLoginWrapper login = new HyperjoLoginWrapper();
-            var loginResult = login.Login("Leter Pustig", "ABCDEFG", "name,money,phonenumber,vehicles", "login-test.hyperjo.de/login.php");
+            var loginResult = login.Login("Leter Pustig", "ABCDE", "name,money,phonenumber,vehicles", "YOUR_REQUESTET_REDIRECT HERE");
             var ownKey = loginResult.Key;
             var ownId = loginResult.CharacterId;
             
