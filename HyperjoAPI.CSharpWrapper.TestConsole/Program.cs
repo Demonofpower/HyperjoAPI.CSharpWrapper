@@ -6,6 +6,13 @@ namespace HyperjoAPI.CSharpWrapper.TestConsole
     {
         static void Main(string[] args)
         {
+            //Usage of login system
+            //We need the Character name, the own password,the key of all rights we want with ',' to separate (in this case all available), and a redirect (i hijacked the test login i hope u don´t mind :*)
+            HyperjoLoginWrapper login = new HyperjoLoginWrapper();
+            var loginResult = login.Login("Leter Pustig", "ABCDEFG", "name,money,phonenumber,vehicles", "login-test.hyperjo.de/login.php");
+            var ownKey = loginResult.Key;
+            var ownId = loginResult.CharacterId;
+            
             //Usage and examples NO KEY
             
             HyperjoAPIWrapper hyperjoApi = new HyperjoAPIWrapper();
@@ -30,10 +37,9 @@ namespace HyperjoAPI.CSharpWrapper.TestConsole
 
             //Usage and examples WITH PERSONAL KEY
             
-            HyperjoAPIWrapper hyperjoApiWithKey = new HyperjoAPIWrapper("9fx1x1a1-af38-440a-a17a-868404fa25e0"); // Invalid example key!
+            HyperjoAPIWrapper hyperjoApiWithKey = new HyperjoAPIWrapper(ownKey.ToString()); // We use own key from above
 
             var name = hyperjoApiWithKey.GetName();
-            var ownId = name.CharacterId;
             var ownName = name.Name;
 
             var money = hyperjoApiWithKey.GetMoney();

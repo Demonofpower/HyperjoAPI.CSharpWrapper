@@ -3,6 +3,7 @@
     public static class HyperjoConstants
     {
         public const string Endpoint = @"https://api.hyperjo.de/";
+        public const string LoginEndpoint = @"https://login.hyperjo.de/login/";
 
         public const string CurrVersion = "1";
 
