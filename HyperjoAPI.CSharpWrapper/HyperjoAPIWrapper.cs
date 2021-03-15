@@ -100,7 +100,15 @@ namespace HyperjoAPI.CSharpWrapper
             using (HttpResponseMessage response = await client.GetAsync(apiCall))
             using (HttpContent content = response.Content)
             {
-                return await content.ReadAsStringAsync();
+                var returnString = await content.ReadAsStringAsync();
+
+                var errorObject = JsonConvert.DeserializeObject<ErrorReturn>(returnString);
+                if (errorObject != null && errorObject.Error)
+                {
+                    throw new HttpRequestException("Error: " + errorObject.Error + "|" + "Message: " + errorObject.Message + "|" + "Info: " + errorObject.Info);
+                }
+
+                return returnString;
             }
         }
 

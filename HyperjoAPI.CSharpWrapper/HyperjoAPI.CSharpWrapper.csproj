@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\ErrorReturn.cs" />
     <Compile Include="DTOs\FarmingTable.cs" />
     <Compile Include="DTOs\GlobalGangStatistics.cs" />
     <Compile Include="DTOs\GlobalStatistics.cs" />
