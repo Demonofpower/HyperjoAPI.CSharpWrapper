@@ -9,22 +9,24 @@ namespace HyperjoAPI.CSharpWrapper
     public class HyperjoAPIWrapper
     {
         private readonly string currKey;
-        
+
         public HyperjoAPIWrapper(string key = "")
         {
             currKey = key;
         }
-        
+
         public GlobalStatistics GetGlobalStatistics()
         {
-            string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.GlobalStatisticsParamValue).Result;
+            string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.GlobalStatisticsParamValue)
+                .Result;
 
             return JsonConvert.DeserializeObject<GlobalStatistics>(returnCall);
         }
 
         public GlobalGangStatistics GetGlobalGangStatistics()
         {
-            string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.GlobalGangStatisticsParamValue).Result;
+            string returnCall =
+                GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.GlobalGangStatisticsParamValue).Result;
 
             return JsonConvert.DeserializeObject<GlobalGangStatistics>(returnCall);
         }
@@ -45,13 +47,17 @@ namespace HyperjoAPI.CSharpWrapper
 
         public NameStats GetName()
         {
+            CheckIfPlayerKeyIsSet();
+
             string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.NameParamValue).Result;
 
             return JsonConvert.DeserializeObject<NameStats>(returnCall);
         }
-        
+
         public MoneyStats GetMoney()
         {
+            CheckIfPlayerKeyIsSet();
+
             string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.MoneyParamValue).Result;
 
             return JsonConvert.DeserializeObject<MoneyStats>(returnCall);
@@ -59,13 +65,17 @@ namespace HyperjoAPI.CSharpWrapper
 
         public PhoneNumberStats GetPhoneNumber()
         {
+            CheckIfPlayerKeyIsSet();
+
             string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.PhoneNumberParamValue).Result;
 
             return JsonConvert.DeserializeObject<PhoneNumberStats>(returnCall);
         }
-        
+
         public VehiclesStats GetVehicles()
         {
+            CheckIfPlayerKeyIsSet();
+
             string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.VehiclesParamValue).Result;
 
             return JsonConvert.DeserializeObject<VehiclesStats>(returnCall);
@@ -73,15 +83,19 @@ namespace HyperjoAPI.CSharpWrapper
 
         public ValidCheck GetValid(int ownId)
         {
-            string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.ValidParamValue, new Tuple<string, string>(HyperjoConstants.CharacterIdParam, ownId.ToString())).Result;
+            CheckIfPlayerKeyIsSet();
+
+            string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.ValidParamValue,
+                new Tuple<string, string>(HyperjoConstants.CharacterIdParam, ownId.ToString())).Result;
 
             return JsonConvert.DeserializeObject<ValidCheck>(returnCall);
         }
 
-        private async Task<string> GetAPICall(string version, string requestType, params Tuple<string, string>[] additionalParameters)
+        private async Task<string> GetAPICall(string version, string requestType,
+            params Tuple<string, string>[] additionalParameters)
         {
             var apiCall = BuildAPICall(version, requestType, additionalParameters);
-            
+
             using (HttpClient client = new HttpClient())
             using (HttpResponseMessage response = await client.GetAsync(apiCall))
             using (HttpContent content = response.Content)
@@ -89,11 +103,13 @@ namespace HyperjoAPI.CSharpWrapper
                 return await content.ReadAsStringAsync();
             }
         }
-        
-        private string BuildAPICall(string version, string requestType, params Tuple<string, string>[] additionalParameters)
+
+        private string BuildAPICall(string version, string requestType,
+            params Tuple<string, string>[] additionalParameters)
         {
-            var callString = HyperjoConstants.Endpoint + "?" + HyperjoConstants.VersionParam + "=" + version + "&" + HyperjoConstants.RequestParam + "=" + requestType;
-            
+            var callString = HyperjoConstants.Endpoint + "?" + HyperjoConstants.VersionParam + "=" + version + "&" +
+                             HyperjoConstants.RequestParam + "=" + requestType;
+
             if (!string.IsNullOrEmpty(currKey))
             {
                 callString += "&" + HyperjoConstants.KeyParam + "=" + currKey;
@@ -105,6 +121,14 @@ namespace HyperjoAPI.CSharpWrapper
             }
 
             return callString;
+        }
+
+        private void CheckIfPlayerKeyIsSet()
+        {
+            if (string.IsNullOrWhiteSpace(currKey))
+            {
+                throw new FormatException("You need to specify a guid-key for this call. Use HyperjoAPIWrapper(KEY) constructor");
+            }
         }
     }
 }
