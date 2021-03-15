@@ -63,13 +63,21 @@ namespace HyperjoAPI.CSharpWrapper
 
             return JsonConvert.DeserializeObject<PhoneNumberStats>(returnCall);
         }
+        
+        public VehiclesStats GetVehicles()
+        {
+            string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.VehiclesParamValue).Result;
+
+            return JsonConvert.DeserializeObject<VehiclesStats>(returnCall);
+        }
+
         public ValidCheck GetValid(int ownId)
         {
             string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.ValidParamValue, new Tuple<string, string>(HyperjoConstants.CharacterIdParam, ownId.ToString())).Result;
 
             return JsonConvert.DeserializeObject<ValidCheck>(returnCall);
         }
-        
+
         private async Task<string> GetAPICall(string version, string requestType, params Tuple<string, string>[] additionalParameters)
         {
             var apiCall = BuildAPICall(version, requestType, additionalParameters);

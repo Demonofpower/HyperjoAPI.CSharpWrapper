@@ -30,7 +30,7 @@ namespace HyperjoAPI.CSharpWrapper.TestConsole
 
             //Usage and examples WITH PERSONAL KEY
             
-            HyperjoAPIWrapper hyperjoApiWithKey = new HyperjoAPIWrapper("32a8428a-7eae-42e1-870e-5f15526d0539"); // Invalid example key!
+            HyperjoAPIWrapper hyperjoApiWithKey = new HyperjoAPIWrapper("9fx1x1a1-af38-440a-a17a-868404fa25e0"); // Invalid example key!
 
             var name = hyperjoApiWithKey.GetName();
             var ownId = name.CharacterId;
@@ -41,11 +41,16 @@ namespace HyperjoAPI.CSharpWrapper.TestConsole
 
             var number = hyperjoApiWithKey.GetPhoneNumber();
             var ownNumber = number.PhoneNumber;
-
             
-            //We need own id for this get call            
-            var valid = hyperjoApiWithKey.GetValid(ownId);
+            var valid = hyperjoApiWithKey.GetValid(ownId); //We need own id for this get call        
             var isOwnKeyValid = valid.Valid;
+
+            var vehicles = hyperjoApiWithKey.GetVehicles();
+            foreach (var vehicle in vehicles.Vehicles)
+            {
+                var displayName = vehicle.DisplayName;
+                var numberPlate = vehicle.NumberPlate;
+            }
 
             Console.ReadLine();
         }

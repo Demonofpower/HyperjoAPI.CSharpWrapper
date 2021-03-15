@@ -19,5 +19,6 @@
         public const string MoneyParamValue = "money";
         public const string PhoneNumberParamValue = "phonenumber";
         public const string ValidParamValue = "valid";
+        public const string VehiclesParamValue = "vehicles";
     }
 }
