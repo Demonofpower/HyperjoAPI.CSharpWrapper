@@ -12,6 +12,13 @@ namespace HyperjoAPI.CSharpWrapper
 {
     public class HyperjoAPIWrapper
     {
+        private readonly string currKey;
+        
+        public HyperjoAPIWrapper(string key = "")
+        {
+            currKey = key;
+        }
+        
         public GlobalStatistics GetGlobalStatistics()
         {
             string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.GlobalStatisticsParamValue).Result;
@@ -54,6 +61,11 @@ namespace HyperjoAPI.CSharpWrapper
         
         private string BuildAPICall(string version, string requestType)
         {
+            if (!string.IsNullOrEmpty(currKey))
+            {
+                return HyperjoConstants.Endpoint + "?" + HyperjoConstants.VersionParam + "=" + version + "&" + HyperjoConstants.RequestParam + "=" + requestType + "&" + HyperjoConstants.KeyParam + "=" + currKey;
+            }
+
             return HyperjoConstants.Endpoint + "?" + HyperjoConstants.VersionParam + "=" + version + "&" + HyperjoConstants.RequestParam + "=" + requestType;
         }
     }

@@ -14,6 +14,7 @@ namespace HyperjoAPI.CSharpWrapper
 
         public const string VersionParam = "version";
         public const string RequestParam = "request";
+        public const string KeyParam = "key";
 
         public const string GlobalStatisticsParamValue = "globalstats";
         public const string GlobalGangStatisticsParamValue = "globalgangstats";
