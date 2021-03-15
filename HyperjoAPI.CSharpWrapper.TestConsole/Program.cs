@@ -9,7 +9,7 @@ namespace HyperjoAPI.CSharpWrapper.TestConsole
             //Usage of login system
             //We need the Character name, the own password,the key of all rights we want with ',' to separate (in this case all available), and a redirect (ask to register yours at the management)
             HyperjoLoginWrapper login = new HyperjoLoginWrapper();
-            var loginResult = login.Login("Leter Pustig", "ABCDE", "name,money,phonenumber,vehicles", "YOUR_REQUESTET_REDIRECT HERE");
+            var loginResult = login.Login("Leter Pustig", "ABCDE", "name,money,phonenumber,vehicles", "YOUR_REQUESTED_REDIRECT_HERE");
             var ownKey = loginResult.Key;
             var ownId = loginResult.CharacterId;
             
@@ -57,7 +57,7 @@ namespace HyperjoAPI.CSharpWrapper.TestConsole
                 var displayName = vehicle.DisplayName;
                 var numberPlate = vehicle.NumberPlate;
             }
-
+            
             Console.ReadLine();
         }
     }
