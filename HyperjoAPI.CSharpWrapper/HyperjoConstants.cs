@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HyperjoAPI.CSharpWrapper
+﻿namespace HyperjoAPI.CSharpWrapper
 {
     public static class HyperjoConstants
     {
@@ -20,5 +14,7 @@ namespace HyperjoAPI.CSharpWrapper
         public const string GlobalGangStatisticsParamValue = "globalgangstats";
         public const string OnlineParamValue = "online";
         public const string FarmingParamValue = "farming";
+        public const string NameParamValue = "name";
+        public const string MoneyParamValue = "money";
     }
 }

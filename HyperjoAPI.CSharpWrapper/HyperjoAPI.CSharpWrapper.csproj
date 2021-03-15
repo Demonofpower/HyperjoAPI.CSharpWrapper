@@ -47,6 +47,8 @@
     <Compile Include="DTOs\FarmingTable.cs" />
     <Compile Include="DTOs\GlobalGangStatistics.cs" />
     <Compile Include="DTOs\GlobalStatistics.cs" />
+    <Compile Include="DTOs\MoneyStats.cs" />
+    <Compile Include="DTOs\NameStats.cs" />
     <Compile Include="DTOs\Online.cs" />
     <Compile Include="HyperjoAPIWrapper.cs" />
     <Compile Include="HyperjoConstants.cs" />

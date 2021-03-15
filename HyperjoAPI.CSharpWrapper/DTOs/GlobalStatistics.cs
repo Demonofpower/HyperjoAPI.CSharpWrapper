@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace HyperjoAPI.CSharpWrapper.DTOs
+﻿namespace HyperjoAPI.CSharpWrapper.DTOs
 {
     public class GlobalStatistics
     {

@@ -6,7 +6,7 @@ namespace HyperjoAPI.CSharpWrapper.TestConsole
     {
         static void Main(string[] args)
         {
-            //Usage and examples
+            //Usage and examples NO KEY
             
             HyperjoAPIWrapper hyperjoApi = new HyperjoAPIWrapper();
 
@@ -24,10 +24,21 @@ namespace HyperjoAPI.CSharpWrapper.TestConsole
             var farmingStatistics = hyperjoApi.GetFarming();
             foreach (var farmingStatistic in farmingStatistics.Farming)
             {
-                var name = farmingStatistic.ItemName;
+                var itemName = farmingStatistic.ItemName;
                 var currentPrice = farmingStatistic.CurrentPrice;
             }
+
+            //Usage and examples WITH PERSONAL KEY
             
+            HyperjoAPIWrapper hyperjoApiWithKey = new HyperjoAPIWrapper("YOUR_KEY_HERE");
+
+            var name = hyperjoApiWithKey.GetName();
+            var ownId = name.CharacterId;
+            var ownName = name.Name;
+
+            var money = hyperjoApiWithKey.GetMoney();
+            var ownMoney = money.Money;
+
             Console.ReadLine();
         }
     }

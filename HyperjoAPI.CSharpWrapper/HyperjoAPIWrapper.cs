@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
-using System.Xml;
 using HyperjoAPI.CSharpWrapper.DTOs;
 using Newtonsoft.Json;
 
@@ -46,7 +41,21 @@ namespace HyperjoAPI.CSharpWrapper
 
             return JsonConvert.DeserializeObject<FarmingTable>(returnCall);
         }
+
+        public NameStats GetName()
+        {
+            string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.NameParamValue).Result;
+
+            return JsonConvert.DeserializeObject<NameStats>(returnCall);
+        }
         
+        public MoneyStats GetMoney()
+        {
+            string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.MoneyParamValue).Result;
+
+            return JsonConvert.DeserializeObject<MoneyStats>(returnCall);
+        }
+
         private async Task<string> GetAPICall(string version, string requestType)
         {
             var apiCall = BuildAPICall(version, requestType);
