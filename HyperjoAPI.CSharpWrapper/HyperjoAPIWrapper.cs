@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using HyperjoAPI.CSharpWrapper.DTOs;
 using Newtonsoft.Json;
@@ -56,9 +57,22 @@ namespace HyperjoAPI.CSharpWrapper
             return JsonConvert.DeserializeObject<MoneyStats>(returnCall);
         }
 
-        private async Task<string> GetAPICall(string version, string requestType)
+        public PhoneNumberStats GetPhoneNumber()
         {
-            var apiCall = BuildAPICall(version, requestType);
+            string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.PhoneNumberParamValue).Result;
+
+            return JsonConvert.DeserializeObject<PhoneNumberStats>(returnCall);
+        }
+        public ValidCheck GetValid(int ownId)
+        {
+            string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.ValidParamValue, new Tuple<string, string>(HyperjoConstants.CharacterIdParam, ownId.ToString())).Result;
+
+            return JsonConvert.DeserializeObject<ValidCheck>(returnCall);
+        }
+        
+        private async Task<string> GetAPICall(string version, string requestType, params Tuple<string, string>[] additionalParameters)
+        {
+            var apiCall = BuildAPICall(version, requestType, additionalParameters);
             
             using (HttpClient client = new HttpClient())
             using (HttpResponseMessage response = await client.GetAsync(apiCall))
@@ -68,14 +82,21 @@ namespace HyperjoAPI.CSharpWrapper
             }
         }
         
-        private string BuildAPICall(string version, string requestType)
+        private string BuildAPICall(string version, string requestType, params Tuple<string, string>[] additionalParameters)
         {
+            var callString = HyperjoConstants.Endpoint + "?" + HyperjoConstants.VersionParam + "=" + version + "&" + HyperjoConstants.RequestParam + "=" + requestType;
+            
             if (!string.IsNullOrEmpty(currKey))
             {
-                return HyperjoConstants.Endpoint + "?" + HyperjoConstants.VersionParam + "=" + version + "&" + HyperjoConstants.RequestParam + "=" + requestType + "&" + HyperjoConstants.KeyParam + "=" + currKey;
+                callString += "&" + HyperjoConstants.KeyParam + "=" + currKey;
             }
 
-            return HyperjoConstants.Endpoint + "?" + HyperjoConstants.VersionParam + "=" + version + "&" + HyperjoConstants.RequestParam + "=" + requestType;
+            foreach (var additionalParameter in additionalParameters)
+            {
+                callString += "&" + additionalParameter.Item1 + "=" + additionalParameter.Item2;
+            }
+
+            return callString;
         }
     }
 }

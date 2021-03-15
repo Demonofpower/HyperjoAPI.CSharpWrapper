@@ -50,6 +50,8 @@
     <Compile Include="DTOs\MoneyStats.cs" />
     <Compile Include="DTOs\NameStats.cs" />
     <Compile Include="DTOs\Online.cs" />
+    <Compile Include="DTOs\PhoneNumberStats.cs" />
+    <Compile Include="DTOs\ValidCheck.cs" />
     <Compile Include="HyperjoAPIWrapper.cs" />
     <Compile Include="HyperjoConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
