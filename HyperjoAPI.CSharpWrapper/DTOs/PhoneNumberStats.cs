@@ -8,7 +8,7 @@ namespace HyperjoAPI.CSharpWrapper.DTOs
 {
     public class PhoneNumberStats
     {
-        public int CharacterId;
+        public string CharacterId;
         public int PhoneNumber;
     }
 }

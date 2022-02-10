@@ -8,7 +8,7 @@ namespace HyperjoAPI.CSharpWrapper.DTOs
 {
     public class ValidCheck
     {
-        public int CharacterId;
+        public string CharacterId;
         public bool Valid;
     }
 }

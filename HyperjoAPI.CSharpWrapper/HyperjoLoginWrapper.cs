@@ -10,7 +10,8 @@ namespace HyperjoAPI.CSharpWrapper
     {
         public Login Login(string characterName, string password, string permissions, string redirect)
         {
-            return JsonConvert.DeserializeObject<Login>(LoginPostCall(characterName, password, permissions, redirect).Result);
+            var result = LoginPostCall(characterName, password, permissions, redirect).Result;
+            return JsonConvert.DeserializeObject<Login>(result);
         }
         
         private async Task<string> LoginPostCall(string characterName, string password, string permissions, string redirect)

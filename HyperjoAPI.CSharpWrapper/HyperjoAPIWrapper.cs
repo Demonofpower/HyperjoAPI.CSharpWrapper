@@ -81,12 +81,12 @@ namespace HyperjoAPI.CSharpWrapper
             return JsonConvert.DeserializeObject<VehiclesStats>(returnCall);
         }
 
-        public ValidCheck GetValid(int ownId)
+        public ValidCheck GetValid(string ownId)
         {
             CheckIfPlayerKeyIsSet();
 
             string returnCall = GetAPICall(HyperjoConstants.CurrVersion, HyperjoConstants.ValidParamValue,
-                new Tuple<string, string>(HyperjoConstants.CharacterIdParam, ownId.ToString())).Result;
+                new Tuple<string, string>(HyperjoConstants.CharacterIdParam, ownId)).Result;
 
             return JsonConvert.DeserializeObject<ValidCheck>(returnCall);
         }

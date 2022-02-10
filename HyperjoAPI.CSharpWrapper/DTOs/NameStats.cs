@@ -2,7 +2,7 @@
 {
     public class NameStats
     {
-        public int CharacterId;
+        public string CharacterId;
         public string Name;
     }
 }

@@ -8,7 +8,7 @@ namespace HyperjoAPI.CSharpWrapper.DTOs
 {
     public class VehiclesStats
     {
-        public int CharacterId;
+        public string CharacterId;
         public List<Vehicle> Vehicles;
     }
 

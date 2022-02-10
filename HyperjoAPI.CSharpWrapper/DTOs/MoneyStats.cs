@@ -2,7 +2,7 @@
 {
     public class MoneyStats
     {
-        public int CharacterId;
+        public string CharacterId;
         public int Money;
     }
 }
